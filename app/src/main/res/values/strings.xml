@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CurrencyConverter</string>
+    <string name="one">1</string>
+    <string name="enter_amount">Enter amount</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="base_currency_not_available">Base currency rate not available</string>
+    <string name="exchange_rate_not_available">Exchange rate for %1$s not available</string>
+</resources>

@@ -1,0 +1,100 @@
+plugins {
+  alias(libs.plugins.android.application)
+  alias(libs.plugins.jetbrains.kotlin.android)
+  alias(libs.plugins.hilt)
+  id 'kotlin-kapt'
+}
+
+android {
+  namespace 'com.currency.converter'
+  compileSdk 35
+
+  defaultConfig {
+    applicationId "com.currency.converter"
+    minSdk 24
+    targetSdk 35
+    versionCode 1
+    versionName "1.0"
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    vectorDrawables {
+      useSupportLibrary true
+    }
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      buildConfigField "String", "API_BASE_URL", "\"https://openexchangerates.org\""
+      buildConfigField "String", "APIKEY", "\"015d3b30c8624528bc595ee287b23e7f\""
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+    debug {
+      minifyEnabled false
+      buildConfigField "String", "API_BASE_URL", "\"https://openexchangerates.org\""
+      buildConfigField "String", "APIKEY", "\"015d3b30c8624528bc595ee287b23e7f\""
+      debuggable true
+    }
+  }
+
+  buildFeatures {
+    buildConfig = true
+    viewBinding = true
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+  kotlinOptions {
+    jvmTarget = '17'
+  }
+  kapt {
+    correctErrorTypes = true
+  }
+  hilt {
+    enableAggregatingTask = false
+  }
+  dataBinding {
+    enabled = true
+  }
+  packaging {
+    resources {
+      excludes += '/META-INF/{AL2.0,LGPL2.1}'
+    }
+  }
+}
+
+dependencies {
+  implementation libs.androidx.core.ktx
+  implementation libs.androidx.lifecycle.runtime.ktx
+  implementation libs.androidx.recyclerview
+  implementation libs.appcompat.android
+  implementation libs.viewmodel.android
+  implementation libs.livedata.android
+  implementation libs.hilt.android
+  implementation libs.androidx.constraintlayout
+  implementation libs.androidx.room.common
+  implementation libs.androidx.room.runtime
+  implementation libs.androidx.room.ktx
+  implementation libs.androidx.cardview
+  kapt libs.androidx.room.compiler
+  kapt libs.hilt.compiler
+  testImplementation libs.junit
+  androidTestImplementation libs.androidx.junit
+  androidTestImplementation libs.androidx.espresso.core
+  implementation libs.okhttp
+  implementation libs.okhttp.logging.interceptor
+  implementation libs.retrofit
+  implementation libs.retrofit.converter.gson
+  implementation libs.androidx.activity.ktx
+
+  testImplementation libs.junit
+  testImplementation libs.mockito.inline
+  testImplementation libs.coroutines.test
+  testImplementation libs.mockito.kotlin.legacy
+  testImplementation libs.mockito.kotlin
+  testImplementation libs.assertj.android
+  testImplementation libs.annotation
+  testImplementation libs.arch.core.testing
+}
